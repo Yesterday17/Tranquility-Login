@@ -49,7 +49,7 @@ namespace Tranquility_Login
             {
                 if (exit == true)
                 {
-                    MessageBox.Show(exec("checkout ."));
+                    //MessageBox.Show(exec("checkout ."));
                     MessageBox.Show(exec("checkout master"));
                 }
                 else
@@ -80,6 +80,7 @@ namespace Tranquility_Login
         private String exec(Process p)
         {
             p.Start();
+            p.WaitForExit();
             return p.StandardOutput.ReadToEnd();
         }
 
