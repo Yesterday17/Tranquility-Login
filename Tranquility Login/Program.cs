@@ -52,7 +52,7 @@ namespace Tranquility_Login
 
         public void Load()
         {
-            Boolean valid = Constants.mcRepositoryIsValid(Constants.path);
+            Boolean valid = MethodUtils.mcRepositoryIsValid(Constants.path);
 
             if (valid)
             {

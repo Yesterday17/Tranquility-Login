@@ -9,13 +9,21 @@ namespace Tranquility_Login.Compatible
     class MultiMC
     {
         public static List<StringUtils.configField> config;
+        private static string location;
 
         public static StringUtils.configField PreLaunchCommand;
         public static StringUtils.configField PostExitCommand;
 
         public MultiMC()
         {
-            config = StringUtils.getConfigFields(FileUtils.ReadFileLines(Constants.multimc_config_path));
+            location = Constants.multimc_config_path;
+            config = StringUtils.getConfigFields(FileUtils.ReadFileLines(location));
+        }
+
+        public MultiMC(string addr)
+        {
+            location = addr;
+            config = StringUtils.getConfigFields(FileUtils.ReadFileLines(location));
         }
 
         public void ModifyStartupExit()
@@ -32,7 +40,7 @@ namespace Tranquility_Login.Compatible
 
         public void SaveMultiMCConfig()
         {
-            FileUtils.WriteLines(Constants.multimc_path, StringUtils.getConfigStrings(config));
+            FileUtils.WriteLines(location, StringUtils.getConfigStrings(config));
         }
     }
 }

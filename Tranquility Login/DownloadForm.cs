@@ -113,7 +113,7 @@ namespace Tranquility_Login
 
                 Repository.Clone(Constants.git_repository, Constants.path, co);
 
-                if (Constants.mcRepositoryIsValid(Constants.path))
+                if (MethodUtils.mcRepositoryIsValid(Constants.path))
                 {
                     MessageBox.Show(mode + "完成！");
 
@@ -156,7 +156,7 @@ namespace Tranquility_Login
                     }
                 });
 
-                if (Constants.mcRepositoryIsValid(Constants.path))
+                if (MethodUtils.mcRepositoryIsValid(Constants.path))
                 {
                     MessageBox.Show(mode + "完成！");
 

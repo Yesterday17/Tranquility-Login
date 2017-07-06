@@ -5,20 +5,32 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
+using Tranquility_Login.Utils;
 
 namespace Tranquility_Login
 {
     class Constants
     {
         public static Repository repo;
-        private static Repository reppo = null;
+        public static String git_repository = "https://git.coding.net/yesterday17/TestMinecraft.git";
+
+        public static string path
+        {
+            get
+            {
+                return multimc_path;
+            }
+        }
+
+        public static string multimc_path = System.Windows.Forms.Application.StartupPath + "\\minecraft\\";
+        public static string multimc_config_path = System.Windows.Forms.Application.StartupPath + "\\instance.cfg";
 
         public static Branch latest
         {
             get
             {
-                if (reppo != null)
-                    return reppo.Branches["latest"];
+                if (MethodUtils.reppo != null)
+                    return MethodUtils.reppo.Branches["latest"];
                 else
                     return repo.Branches["latest"];
             }
@@ -31,8 +43,8 @@ namespace Tranquility_Login
         {
             get
             {
-                if (reppo != null)
-                    return reppo.Branches["master"];
+                if (MethodUtils.reppo != null)
+                    return MethodUtils.reppo.Branches["master"];
                 else
                     return repo.Branches["master"];
             }
@@ -45,8 +57,8 @@ namespace Tranquility_Login
         {
             get
             {
-                if (reppo != null)
-                    return reppo.Branches["origin/latest"];
+                if (MethodUtils.reppo != null)
+                    return MethodUtils.reppo.Branches["origin/latest"];
                 else
                     return repo.Branches["origin/latest"];
             }
@@ -59,8 +71,8 @@ namespace Tranquility_Login
         {
             get
             {
-                if (reppo != null)
-                    return reppo.Branches["origin/master"];
+                if (MethodUtils.reppo != null)
+                    return MethodUtils.reppo.Branches["origin/master"];
                 else
                     return repo.Branches["origin/master"];
             }
@@ -69,13 +81,6 @@ namespace Tranquility_Login
                 //repo.Branches["latest"] = value;
             }
         }
-
-
-
-        public static string path = System.Windows.Forms.Application.StartupPath + "/minecraft/";
-
-        public static string multimc_path = System.Windows.Forms.Application.StartupPath + "/minecraft/";
-        public static string multimc_config_path = System.Windows.Forms.Application.StartupPath + "/instance.cfg";
 
         /// <summary>
         /// 通过命令行判别的程序运行模式
@@ -89,8 +94,6 @@ namespace Tranquility_Login
             update = 4,
             multimc = 5
         };
-
-        public static String git_repository = "https://git.coding.net/yesterday17/TestMinecraft.git";
 
         public static Signature sign = new Signature(
             "tan90",                   //Username
@@ -107,57 +110,5 @@ namespace Tranquility_Login
             };
         };
 
-        /// <summary>
-        /// 判断一Minecraft仓库是否合法
-        /// </summary>
-        /// <param name="path">仓库地址</param>
-        /// <returns>是否合法</returns>
-        public static Boolean mcRepositoryIsValid(String path)
-        {
-            if (!Directory.Exists(path))
-            {
-                Directory.CreateDirectory(path);
-                return false;
-            }
-
-            if (!Repository.IsValid(path))
-                return false;
-
-
-            using (reppo = new Repository(path))
-            {
-                if (Constants.origin_latest == null || Constants.origin_master == null)
-                    return false;
-
-                if (Constants.latest == null)
-                {
-                    Constants.latest = branchTrack(reppo, Constants.origin_latest, "latest");
-                }
-                reppo = null;
-            }
-            return true;
-        }
-
-        /// <summary>
-        /// 判断一Minecraft仓库是否合法
-        /// </summary>
-        /// <returns></returns>
-        public static Boolean mcRepositoryIsValid()
-        {
-            return mcRepositoryIsValid(path);
-        }
-
-        /// <summary>
-        /// 新建特定分支与远端分支建立Track
-        /// </summary>
-        /// <param name="repo">代码仓库</param>
-        /// <param name="originBranch">远端分支</param>
-        /// <returns></returns>
-        public static Branch branchTrack(Repository repo, Branch originBranch, String newBranch)
-        {
-            Branch branch = repo.CreateBranch(newBranch, originBranch.Tip);
-            repo.Branches.Update(branch, b => b.TrackedBranch = originBranch.CanonicalName);
-            return branch;
-        }
     }
 }
