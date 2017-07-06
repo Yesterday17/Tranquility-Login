@@ -43,9 +43,7 @@ namespace Tranquility_Login
         {
             state = Constants.LoadState.init;
         }
-
         
-
         public void Load()
         {
             Boolean valid = Constants.mcRepositoryIsValid(Constants.path);
@@ -56,14 +54,13 @@ namespace Tranquility_Login
                 switch (state)
                 {
                     case Constants.LoadState.startup:
-                        //$ git checkout .
-                        Commands.Checkout(Constants.repo, Constants.master);
+                        Constants.repo.Reset(ResetMode.Hard);
                         //$ git checkout latest
                         Commands.Checkout(Constants.repo, Constants.latest);
                         break;
 
-                    case Constants.LoadState.exit:                        //$ git checkout .
-                        Commands.Checkout(Constants.repo, Constants.latest);
+                    case Constants.LoadState.exit:
+                        Constants.repo.Reset(ResetMode.Hard);
                         //$ git checkout master
                         Commands.Checkout(Constants.repo, Constants.master);
                         break;
