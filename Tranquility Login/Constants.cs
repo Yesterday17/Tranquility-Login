@@ -1,6 +1,8 @@
 ﻿using LibGit2Sharp;
+using LibGit2Sharp.Handlers;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 
@@ -9,13 +11,13 @@ namespace Tranquility_Login
     class Constants
     {
         public static Repository repo;
-        private static Repository reppo;
+        private static Repository reppo = null;
 
         public static Branch latest
         {
             get
             {
-                if(reppo != null)
+                if (reppo != null)
                     return reppo.Branches["latest"];
                 else
                     return repo.Branches["latest"];
@@ -68,12 +70,12 @@ namespace Tranquility_Login
             }
         }
 
-        public static String git_repository = "https://git.coding.net/yesterday17/TestMinecraft.git";
 
-        public static Signature sign = new Signature("tan90", "tan90@yesterday17.cn", new DateTimeOffset());
 
         public static string path = System.Windows.Forms.Application.StartupPath + "/minecraft/";
-        public static string multimc_path = System.Windows.Forms.Application.StartupPath + "/instance.cfg";
+
+        public static string multimc_path = System.Windows.Forms.Application.StartupPath + "/minecraft/";
+        public static string multimc_config_path = System.Windows.Forms.Application.StartupPath + "/instance.cfg";
 
         /// <summary>
         /// 通过命令行判别的程序运行模式
@@ -84,7 +86,25 @@ namespace Tranquility_Login
             exit = 2,
 
             init = 3,
-            update = 4
+            update = 4,
+            multimc = 5
+        };
+
+        public static String git_repository = "https://git.coding.net/yesterday17/TestMinecraft.git";
+
+        public static Signature sign = new Signature(
+            "tan90",                   //Username
+            "tan90@yesterday17.cn",    //E-mail
+            new DateTimeOffset()
+        );
+
+        public static CredentialsHandler credentials = (_url, _user, _cred) =>
+        {
+            return new UsernamePasswordCredentials
+            {
+                Username = "yesterday17",
+                Password = "001206"
+            };
         };
 
         /// <summary>
@@ -94,8 +114,15 @@ namespace Tranquility_Login
         /// <returns>是否合法</returns>
         public static Boolean mcRepositoryIsValid(String path)
         {
+            if (!Directory.Exists(path))
+            {
+                Directory.CreateDirectory(path);
+                return false;
+            }
+
             if (!Repository.IsValid(path))
                 return false;
+
 
             using (reppo = new Repository(path))
             {
@@ -104,25 +131,33 @@ namespace Tranquility_Login
 
                 if (Constants.latest == null)
                 {
-                    Constants.latest = branchTrack(reppo, Constants.origin_latest);
+                    Constants.latest = branchTrack(reppo, Constants.origin_latest, "latest");
                 }
                 reppo = null;
             }
             return true;
         }
 
+        /// <summary>
+        /// 判断一Minecraft仓库是否合法
+        /// </summary>
+        /// <returns></returns>
         public static Boolean mcRepositoryIsValid()
         {
             return mcRepositoryIsValid(path);
         }
 
-        public static Branch branchTrack(Repository repo, Branch originBranch)
+        /// <summary>
+        /// 新建特定分支与远端分支建立Track
+        /// </summary>
+        /// <param name="repo">代码仓库</param>
+        /// <param name="originBranch">远端分支</param>
+        /// <returns></returns>
+        public static Branch branchTrack(Repository repo, Branch originBranch, String newBranch)
         {
-            Branch branch = repo.CreateBranch("latest", originBranch.Tip);
+            Branch branch = repo.CreateBranch(newBranch, originBranch.Tip);
             repo.Branches.Update(branch, b => b.TrackedBranch = originBranch.CanonicalName);
             return branch;
         }
-
-         
     }
 }

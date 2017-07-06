@@ -15,7 +15,7 @@ namespace Tranquility_Login.Compatible
 
         public MultiMC()
         {
-            config = StringUtils.getConfigFields(FileUtils.ReadFileLines(Constants.multimc_path));
+            config = StringUtils.getConfigFields(FileUtils.ReadFileLines(Constants.multimc_config_path));
         }
 
         public void ModifyStartupExit()

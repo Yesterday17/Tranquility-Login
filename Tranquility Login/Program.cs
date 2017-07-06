@@ -11,6 +11,7 @@ namespace Tranquility_Login
     class MainJudge
     {
         private Constants.LoadState state;
+        private DownloadForm frm_download;
 
         public MainJudge(String arg)
         {
@@ -26,7 +27,7 @@ namespace Tranquility_Login
                     break;
 
                 case "init":
-                    state = Constants.LoadState.startup;
+                    state = Constants.LoadState.init;
                     break;
 
                 case "update":
@@ -35,7 +36,7 @@ namespace Tranquility_Login
                     break;
 
                 case "multimc":
-                    MethodUtils.MultiMCConfigure();
+                    state = Constants.LoadState.multimc;
                     break;
 
                 default:
@@ -48,7 +49,7 @@ namespace Tranquility_Login
         {
             state = Constants.LoadState.init;
         }
-        
+
         public void Load()
         {
             Boolean valid = Constants.mcRepositoryIsValid(Constants.path);
@@ -59,15 +60,12 @@ namespace Tranquility_Login
                 switch (state)
                 {
                     case Constants.LoadState.startup:
-                        Constants.repo.Reset(ResetMode.Hard);
-                        //$ git checkout latest
-                        Commands.Checkout(Constants.repo, Constants.latest);
+                        MethodUtils.CheckoutLatest();
+                        Application.Run(new DownloadForm("更新"));
                         break;
 
                     case Constants.LoadState.exit:
-                        Constants.repo.Reset(ResetMode.Hard);
-                        //$ git checkout master
-                        Commands.Checkout(Constants.repo, Constants.master);
+                        MethodUtils.CheckoutMaster();
                         break;
 
                     case Constants.LoadState.init:
@@ -76,13 +74,18 @@ namespace Tranquility_Login
                         break;
 
                     case Constants.LoadState.update:
-                        //
+                        frm_download = new DownloadForm("更新");
+                        frm_download.Show();
+                        break;
+
+                    case Constants.LoadState.multimc:
+                        MethodUtils.MultiMCConfigure();
                         break;
                 }
             }
             else
             {
-                Application.Run(new DownloadForm("客户端下载中……"));
+                Application.Run(new DownloadForm("下载"));
             }
         }
     }
@@ -107,6 +110,6 @@ namespace Tranquility_Login
 
             main.Load();
         }
-        
+
     }
 }

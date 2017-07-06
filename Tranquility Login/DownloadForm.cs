@@ -21,6 +21,11 @@ namespace Tranquility_Login
         private static Label label_size;
         private static ProgressBar progress_download;
 
+        public Boolean exit = true;
+
+
+        public static string mode = "下载";
+
         private Boolean clone_finished
         {
             get
@@ -29,7 +34,14 @@ namespace Tranquility_Login
             }
             set
             {
-                System.Environment.Exit(0);
+                if (exit)
+                {
+                    System.Environment.Exit(0);
+                }
+                else
+                {
+                    this.Dispose();
+                }
             }
         }
 
@@ -37,13 +49,16 @@ namespace Tranquility_Login
 
         public DownloadForm()
         {
-            init();            
+            init();
         }
 
         public DownloadForm(String text)
         {
             init();
-            this.Text = text;
+            mode = text;
+
+            this.Text = mode + "中……";
+            this.label1.Text = this.Text;
         }
 
         private void init()
@@ -57,24 +72,29 @@ namespace Tranquility_Login
 
         public static bool TransferProgress(TransferProgress progress)
         {
-            //MessageBox.Show($"Objects: {progress.ReceivedObjects} of {progress.TotalObjects}, Bytes: {progress.ReceivedBytes}");
-
             textTip textEdit = delegate (double receive, double total)
             {
                 label_download.Text = (receive / total * 100).ToString("F2") + "%";
-                label_size.Text = $"已下载：{progress.ReceivedBytes / 1024 / 1024} MB";
+                label_size.Text = $"已{mode}：{progress.ReceivedBytes / 1024 / 1024} MB";
                 progress_download.Value = (int)(receive / total * 100);
             };
             label_download.Invoke(textEdit, progress.ReceivedObjects, progress.TotalObjects);
 
-            //label_download.Text = (progress.ReceivedObjects/progress.TotalObjects).ToString("#0.00") + "%";
             return true;
         }
 
         private void DownloadForm_Load(object sender, EventArgs e)
         {
-            Task clone = new Task(CloneMethod);
-            clone.Start();
+            if (mode == "下载")
+            {
+                Task clone = new Task(CloneMethod);
+                clone.Start();
+            }
+            else if (mode == "更新")
+            {
+                Task update = new Task(PullMethod);
+                update.Start();
+            }
         }
 
         private void CloneMethod()
@@ -86,18 +106,17 @@ namespace Tranquility_Login
 
                 CloneOptions co = new CloneOptions
                 {
-                    BranchName = "master",
+                    //BranchName = "master",
                     OnTransferProgress = DownloadForm.TransferProgress,
-                    CredentialsProvider = (_url, _user, _cred) => new UsernamePasswordCredentials { Username = "yesterday17", Password = "001206" }
+                    CredentialsProvider = Constants.credentials
                 };
 
                 Repository.Clone(Constants.git_repository, Constants.path, co);
 
                 if (Constants.mcRepositoryIsValid(Constants.path))
                 {
-                    MessageBox.Show("下载完成！");
+                    MessageBox.Show(mode + "完成！");
 
-                    //配置MultiMC
                     MethodUtils.MultiMCConfigure();
                     clone_finished = true;
                 }
@@ -112,8 +131,47 @@ namespace Tranquility_Login
                 MessageBox.Show("请尝试重新启动该程序！");
 
                 //删除并重建minecraft文件夹
-                Directory.Delete(Constants.path, true);
-                Directory.CreateDirectory(Constants.path);
+                try
+                {
+                    Directory.Delete(Constants.path, true);
+                    Directory.CreateDirectory(Constants.path);
+                }
+                finally
+                {
+                    System.Environment.Exit(-1);
+                }
+            }
+        }
+
+        private void PullMethod()
+        {
+            try
+            {
+                Commands.Pull(Constants.repo, Constants.sign, new PullOptions()
+                {
+                    FetchOptions = new FetchOptions()
+                    {
+                        CredentialsProvider = Constants.credentials,
+                        OnTransferProgress = TransferProgress
+                    }
+                });
+
+                if (Constants.mcRepositoryIsValid(Constants.path))
+                {
+                    MessageBox.Show(mode + "完成！");
+
+                    MethodUtils.MultiMCConfigure();
+                    clone_finished = true;
+                }
+                else
+                {
+                    throw new Exception("未知错误！");
+                }
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message);
+                MessageBox.Show("请尝试重新启动该程序！");
 
                 System.Environment.Exit(-1);
             }
