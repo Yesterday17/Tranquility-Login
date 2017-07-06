@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -78,6 +79,9 @@ namespace Tranquility_Login
         {
             try
             {
+                if (!Directory.Exists(Constants.path))
+                    Directory.CreateDirectory(Constants.path);
+
                 CloneOptions co = new CloneOptions
                 {
                     BranchName = "master",
@@ -86,15 +90,28 @@ namespace Tranquility_Login
                 };
 
                 Repository.Clone(Constants.git_repository, Constants.path, co);
+
+                if (Constants.mcRepositoryIsValid(Constants.path))
+                {
+                    MessageBox.Show("下载完成！");
+                    clone_finished = true;
+                }
+                else
+                {
+                    throw new Exception("未知错误！可能未与远端分支绑定！");
+                }
             }
             catch (Exception e)
             {
                 MessageBox.Show(e.Message);
                 MessageBox.Show("请尝试重新启动该程序！");
+
+                //删除并重建minecraft文件夹
+                Directory.Delete(Constants.path, true);
+                Directory.CreateDirectory(Constants.path);
+
                 System.Environment.Exit(0);
             }
-            MessageBox.Show("下载完成！");
-            clone_finished = true;
         }
     }
 }

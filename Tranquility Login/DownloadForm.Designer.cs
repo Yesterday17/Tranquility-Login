@@ -51,6 +51,9 @@
             // 
             // lb_download
             // 
+            this.lb_download.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.lb_download.AutoSize = true;
             this.lb_download.Location = new System.Drawing.Point(130, 122);
             this.lb_download.Name = "lb_download";
@@ -86,7 +89,7 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "DownloadForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "客户端下载中……";
+            this.Text = "下载中……";
             this.Load += new System.EventHandler(this.DownloadForm_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
