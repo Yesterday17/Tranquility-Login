@@ -9,6 +9,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Tranquility_Login.Compatible;
+using Tranquility_Login.Utils;
 
 namespace Tranquility_Login
 {
@@ -94,6 +96,9 @@ namespace Tranquility_Login
                 if (Constants.mcRepositoryIsValid(Constants.path))
                 {
                     MessageBox.Show("下载完成！");
+
+                    //配置MultiMC
+                    MethodUtils.MultiMCConfigure();
                     clone_finished = true;
                 }
                 else
@@ -110,7 +115,7 @@ namespace Tranquility_Login
                 Directory.Delete(Constants.path, true);
                 Directory.CreateDirectory(Constants.path);
 
-                System.Environment.Exit(0);
+                System.Environment.Exit(-1);
             }
         }
     }

@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Tranquility_Login.Utils;
 
 namespace Tranquility_Login
 {
@@ -31,6 +32,10 @@ namespace Tranquility_Login
                 case "update":
                 case "upgrade":
                     state = Constants.LoadState.update;
+                    break;
+
+                case "multimc":
+                    MethodUtils.MultiMCConfigure();
                     break;
 
                 default:

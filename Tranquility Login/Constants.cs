@@ -73,7 +73,11 @@ namespace Tranquility_Login
         public static Signature sign = new Signature("tan90", "tan90@yesterday17.cn", new DateTimeOffset());
 
         public static string path = System.Windows.Forms.Application.StartupPath + "/minecraft/";
+        public static string multimc_path = System.Windows.Forms.Application.StartupPath + "/instance.cfg";
 
+        /// <summary>
+        /// 通过命令行判别的程序运行模式
+        /// </summary>
         public enum LoadState
         {
             startup = 1,
@@ -83,6 +87,11 @@ namespace Tranquility_Login
             update = 4
         };
 
+        /// <summary>
+        /// 判断一Minecraft仓库是否合法
+        /// </summary>
+        /// <param name="path">仓库地址</param>
+        /// <returns>是否合法</returns>
         public static Boolean mcRepositoryIsValid(String path)
         {
             if (!Repository.IsValid(path))
