@@ -29,12 +29,16 @@ namespace Tranquility_Login.Utils
             List<String> lines = new List<string>();
             try
             {
-                StreamReader sr = new StreamReader(fileName, Encoding.Default);
+                FileStream fs = new FileStream(fileName, FileMode.Open, FileAccess.Read, FileShare.ReadWrite);
+                StreamReader sr = new StreamReader(fs, Encoding.UTF8);
                 String line;
                 while ((line = sr.ReadLine()) != null)
                 {
                     lines.Add(line);
                 }
+
+                sr.Close();
+                fs.Close();
             }
             catch (Exception e)
             {
