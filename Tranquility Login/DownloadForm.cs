@@ -13,9 +13,11 @@ namespace Tranquility_Login
 {
     public partial class DownloadForm : Form
     {
-        public static String git_repository = "https://git.coding.net/yesterday17/TestMinecraft.git";
         private static Form frmDownload;
         private static Label label_download;
+        private static Label label_size;
+        private static ProgressBar progress_download;
+
         private Boolean clone_finished
         {
             get
@@ -46,6 +48,8 @@ namespace Tranquility_Login
             InitializeComponent();
             frmDownload = this;
             label_download = this.lb_download;
+            label_size = this.lb_size;
+            progress_download = this.prog_download;
         }
 
         public static bool TransferProgress(TransferProgress progress)
@@ -55,6 +59,8 @@ namespace Tranquility_Login
             textTip textEdit = delegate (double receive, double total)
             {
                 label_download.Text = (receive / total * 100).ToString("F2") + "%";
+                label_size.Text = $"已下载：{progress.ReceivedBytes / 1024 / 1024} MB";
+                progress_download.Value = (int)(receive / total * 100);
             };
             label_download.Invoke(textEdit, progress.ReceivedObjects, progress.TotalObjects);
 
@@ -79,12 +85,12 @@ namespace Tranquility_Login
                     CredentialsProvider = (_url, _user, _cred) => new UsernamePasswordCredentials { Username = "yesterday17", Password = "001206" }
                 };
 
-                Repository.Clone(git_repository, Application.StartupPath + "/minecraft/", co);
+                Repository.Clone(Constants.git_repository, Constants.path, co);
             }
             catch (Exception e)
             {
                 MessageBox.Show(e.Message);
-                MessageBox.Show("请尝试重写启动该程序！");
+                MessageBox.Show("请尝试重新启动该程序！");
                 System.Environment.Exit(0);
             }
             MessageBox.Show("下载完成！");

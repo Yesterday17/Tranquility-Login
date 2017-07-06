@@ -10,12 +10,13 @@ namespace Tranquility_Login
     class MainJudge
     {
         public Repository repo;
+
         public Branch latest = null;
         public Branch master = null;
         public Branch origin_latest = null;
         public Branch origin_master = null;
 
-        public static string path = Application.StartupPath + "/minecraft/";
+        
 
         public enum LoadState
         {
@@ -89,24 +90,28 @@ namespace Tranquility_Login
                     }
                     MessageBox.Show(b.FriendlyName);
                 }
+                if (this.origin_latest == null || this.origin_master == null)
+                    return false;
+
+                if (this.latest == null)
+                {
+                    this.latest = repo.CreateBranch("latest", origin_latest.Tip);
+                    repo.Branches.Update(latest, b => b.TrackedBranch = origin_latest.CanonicalName);
+                }
             }
-
-            if (this.origin_latest == null || this.origin_master == null)
-                return false;
-
             return true;
         }
 
         public void Load()
         {
-            Boolean valid = mcRepositoryIsValid(path);
+            Boolean valid = mcRepositoryIsValid(Constants.path);
 
             if (valid)
             {
                 switch (state)
                 {
                     case LoadState.startup:
-                        repo = new Repository(path);
+                        repo = new Repository(Constants.path);
                         //$ git checkout .
                         Commands.Checkout(repo, master);
                         //$ git checkout latest
@@ -114,7 +119,7 @@ namespace Tranquility_Login
                         break;
 
                     case LoadState.exit:
-                        repo = new Repository(path);
+                        repo = new Repository(Constants.path);
                         //$ git checkout .
                         Commands.Checkout(repo, latest);
                         //$ git checkout master
@@ -151,15 +156,12 @@ namespace Tranquility_Login
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
 
-            MessageBox.Show(args.Length.ToString());
-
             if (args.Length == 1)
                 main = new MainJudge(args[0]);
             else
                 main = new MainJudge();
 
             main.Load();
-            MessageBox.Show("exit");
         }
         
     }
