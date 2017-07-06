@@ -159,8 +159,6 @@ namespace Tranquility_Login
                 if (MethodUtils.mcRepositoryIsValid(Constants.path))
                 {
                     MessageBox.Show(mode + "完成！");
-
-                    MethodUtils.MultiMCConfigure();
                     clone_finished = true;
                 }
                 else
