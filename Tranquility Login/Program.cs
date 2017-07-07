@@ -41,7 +41,7 @@ namespace Tranquility_Login
                     break;
 
                 case "daemon":
-                    state = Constants.LoadState.daemon;//
+                    state = Constants.LoadState.daemon;
                     break;
 
                 case "track":
@@ -91,7 +91,7 @@ namespace Tranquility_Login
                         break;
 
                     case Constants.LoadState.daemon:
-                        ProcessUtils.StartProcess("Tranquility Login.exe", arguments[1]);
+                        ProcessUtils.StartProcess(Constants.self, arguments[1]);
                         break;
 
                     case Constants.LoadState.startupTrack:
@@ -100,7 +100,7 @@ namespace Tranquility_Login
                         new DownloadForm("更新").Show();
 
                         //Track
-                        ProcessUtils.StartProcess("Tranquility Login.exe", "track");
+                        ProcessUtils.StartProcess(Constants.self, "track");
                         break;
 
                     case Constants.LoadState.track:
@@ -108,7 +108,7 @@ namespace Tranquility_Login
                         {
                             ProcessUtils.Track();
                         } while (MethodUtils.Alike(ProcessUtils.findNoMinecraftProcessTime, Constants.StartTime, 60000));
-                        ProcessUtils.StartProcess("Tranquility Login.exe", "exit");
+                        ProcessUtils.StartProcess(Constants.self, "exit");
                         break;
                 }
             }

@@ -13,8 +13,9 @@ namespace Tranquility_Login
     {
         public static Repository repo;
         public static String git_repository = "https://git.coding.net/yesterday17/TestMinecraft.git";
-        public static String self = System.Diagnostics.Process.GetCurrentProcess().ProcessName;
+        public static String self_name = System.Diagnostics.Process.GetCurrentProcess().ProcessName;
         public static String self_path = System.Windows.Forms.Application.StartupPath;
+        public static String self = self_path + "\\" + self_name + ".exe";
 
         public static string path
         {
@@ -27,7 +28,7 @@ namespace Tranquility_Login
         public static string multimc_path = self_path + "\\minecraft\\";
         public static string multimc_config_path = self_path + "\\instance.cfg";
 
-        public static DateTime StartTime = DateTime.Now;
+        public static readonly DateTime StartTime = DateTime.Now;
 
         public static Branch latest
         {

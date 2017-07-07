@@ -112,7 +112,7 @@ namespace Tranquility_Login.Utils
         public static String DateTime2TimeStamp(DateTime t)
         {
             System.DateTime startTime = TimeZone.CurrentTimeZone.ToLocalTime(new System.DateTime(1970, 1, 1)); // 当地时区
-            long timeStamp = (long)(DateTime.Now - startTime).TotalMilliseconds; // 相差毫秒数
+            long timeStamp = (long)(t - startTime).TotalMilliseconds; // 相差毫秒数
             return timeStamp.ToString();
         }
 

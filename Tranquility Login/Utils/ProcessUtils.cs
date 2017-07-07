@@ -18,15 +18,18 @@ namespace Tranquility_Login.Utils
 
             foreach (Process process in processes)
             {
-                //System.Windows.Forms.MessageBox.Show($"Title: {process.MainWindowTitle.Substring(0, 9)}\nName: {process.ProcessName}\n");
                 findNoMinecraftProcessTime = DateTime.Now;
-                if ((process.ProcessName == "java" || process.ProcessName == "javaw")
-                    && process.MainWindowTitle.Length >= 9
-                    && process.MainWindowTitle.Substring(0, 9) == "Minecraft"
-                    && MethodUtils.Alike(process.StartTime, Constants.StartTime, 60000))
+
+                if(process.MainWindowTitle.Length >= 9)
                 {
-                    findNoMinecraftProcessTime = Constants.StartTime;
+                    if ((process.ProcessName == "java" || process.ProcessName == "javaw")
+                    && process.MainWindowTitle.Substring(0, 9) == "Minecraft"
+                    && MethodUtils.Alike(process.StartTime, Constants.StartTime, 600000000))
+                    {
+                        findNoMinecraftProcessTime = Constants.StartTime;
+                    }
                 }
+                
             }
         }
 
