@@ -12,6 +12,7 @@ namespace Tranquility_Login
     {
         private Constants.LoadState state;
         private DownloadForm frm_download;
+        public String[] arguments;
 
         public MainJudge(String arg)
         {
@@ -39,15 +40,18 @@ namespace Tranquility_Login
                     state = Constants.LoadState.multimc;
                     break;
 
+                case "daemon":
+                    state = Constants.LoadState.daemon;//
+                    break;
+
+                case "track":
+                    state = Constants.LoadState.track;
+                    break;
+
                 default:
                     state = Constants.LoadState.init;
                     break;
             }
-        }
-
-        public MainJudge()
-        {
-            state = Constants.LoadState.init;
         }
 
         public void Load()
@@ -81,7 +85,24 @@ namespace Tranquility_Login
                     case Constants.LoadState.multimc:
                         MethodUtils.MultiMCConfigure();
                         break;
+
+                    case Constants.LoadState.daemon:
+                        ProcessUtils.StartProcess("Tranquility Login.exe", arguments[1]);
+                        break;
+
+                    case Constants.LoadState.track:
+                        while (true)
+                        {
+                            ProcessUtils.Track();
+                        }
+
+                        break;
                 }
+            }
+            else if (state == Constants.LoadState.daemon)
+            {
+                ProcessUtils.StartProcess("Tranquility Login.exe", arguments[1]);
+                System.Environment.Exit(0);
             }
             else
             {
@@ -103,10 +124,13 @@ namespace Tranquility_Login
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
 
-            if (args.Length == 1)
+            if (args.Length >= 1)
+            {
                 main = new MainJudge(args[0]);
+                main.arguments = args;
+            }
             else
-                main = new MainJudge();
+                main = new MainJudge("");
 
             main.Load();
         }

@@ -13,6 +13,7 @@ namespace Tranquility_Login.Compatible
 
         public static StringUtils.configField PreLaunchCommand;
         public static StringUtils.configField PostExitCommand;
+        public static StringUtils.configField OverrideCommands;
 
         public MultiMC()
         {
@@ -30,12 +31,15 @@ namespace Tranquility_Login.Compatible
         {
             PreLaunchCommand = StringUtils.getConfigFieldByName(config, "PreLaunchCommand");
             PostExitCommand = StringUtils.getConfigFieldByName(config, "PostExitCommand");
+            OverrideCommands = StringUtils.getConfigFieldByName(config, "OverrideCommands");
 
-            PreLaunchCommand.data = "\"$INST_DIR/Tranquility Login.exe\" exit";
-            PostExitCommand.data = "\"$INST_DIR/Tranquility Login.exe\" startup";
+            PreLaunchCommand.data = "\"$INST_DIR/Tranquility Login.exe\" startup";
+            PostExitCommand.data = "\"$INST_DIR/Tranquility Login.exe\" exit";
+            OverrideCommands.data = "true";
 
             config.Add(PreLaunchCommand);
             config.Add(PostExitCommand);
+            config.Add(OverrideCommands);
         }
 
         public void SaveMultiMCConfig()

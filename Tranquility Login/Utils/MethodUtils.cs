@@ -102,5 +102,53 @@ namespace Tranquility_Login.Utils
         {
 
         }
+
+        /// <summary>
+        /// C# DateTime转Javascript时间戳
+        /// </summary>
+        /// <see cref="http://www.cnblogs.com/polk6/archive/2016/11/04/6024892.html"/>
+        /// <param name="t">DateTime</param>
+        /// <returns>Javascript时间戳</returns>
+        public static String DateTime2TimeStamp(DateTime t)
+        {
+            System.DateTime startTime = TimeZone.CurrentTimeZone.ToLocalTime(new System.DateTime(1970, 1, 1)); // 当地时区
+            long timeStamp = (long)(DateTime.Now - startTime).TotalMilliseconds; // 相差毫秒数
+            return timeStamp.ToString();
+        }
+
+        /// <summary>
+        /// Javascript时间戳转C# DateTime
+        /// </summary>
+        /// <see cref="http://www.cnblogs.com/polk6/archive/2016/11/04/6024892.html"/>
+        /// <param name="t">Javascript时间戳</param>
+        /// <returns>DateTime</returns>
+        public static DateTime TimeStamp2DateTime(String t)
+        {
+            System.DateTime startTime = TimeZone.CurrentTimeZone.ToLocalTime(new System.DateTime(1970, 1, 1)); // 当地时区
+            return startTime.AddMilliseconds(long.Parse(t));
+        }
+
+        /// <summary>
+        /// Javascript时间戳转C# DateTime
+        /// </summary>
+        /// <see cref="http://www.cnblogs.com/polk6/archive/2016/11/04/6024892.html"/>
+        /// <param name="t">Javascript时间戳</param>
+        /// <returns>DateTime</returns>
+        public static DateTime TimeStamp2DateTime(long t)
+        {
+            System.DateTime startTime = TimeZone.CurrentTimeZone.ToLocalTime(new System.DateTime(1970, 1, 1)); // 当地时区
+            return startTime.AddMilliseconds(t);
+        }
+
+        /// <summary>
+        /// 判断两个DateTime之间是否相似(即相隔时间在一定范围以内)
+        /// </summary>
+        /// <param name="x"></param>
+        /// <param name="y"></param>
+        /// <returns></returns>
+        public static Boolean Alike(DateTime x, DateTime y)
+        {
+            return Math.Abs(long.Parse(DateTime2TimeStamp(x)) - long.Parse(DateTime2TimeStamp(y))) < 60000;
+        }
     }
 }
