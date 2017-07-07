@@ -85,6 +85,7 @@ namespace Tranquility_Login
 
         private void DownloadForm_Load(object sender, EventArgs e)
         {
+            Control.CheckForIllegalCrossThreadCalls = false;
             if (mode == "下载")
             {
                 Task clone = new Task(CloneMethod);
