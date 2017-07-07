@@ -12,7 +12,7 @@ namespace Tranquility_Login
     class Constants
     {
         public static Repository repo;
-        public static String git_repository = "https://git.coding.net/yesterday17/TestMinecraft.git";
+        public static String git_repository = "https://git.oschina.net/yesterday17cn/tranquility_8.git";
         public static String self_name = System.Diagnostics.Process.GetCurrentProcess().ProcessName;
         public static String self_path = System.Windows.Forms.Application.StartupPath;
         public static String self = self_path + "\\" + self_name + ".exe";
@@ -115,8 +115,8 @@ namespace Tranquility_Login
         {
             return new UsernamePasswordCredentials
             {
-                Username = "yesterday17",
-                Password = "001206"
+                Username = "yesterday17cn",
+                Password = "modpackDownload"
             };
         };
 
