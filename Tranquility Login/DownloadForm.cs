@@ -40,7 +40,7 @@ namespace Tranquility_Login
                 }
                 else
                 {
-                    this.Dispose();
+                    this.Close();
                 }
             }
         }

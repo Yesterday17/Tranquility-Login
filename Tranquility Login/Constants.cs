@@ -25,7 +25,7 @@ namespace Tranquility_Login
             }
         }
 
-        public static string multimc_path = self_path + "\\minecraft\\";
+        private static string multimc_path = self_path + "\\minecraft\\";
         public static string multimc_config_path = self_path + "\\instance.cfg";
 
         public static readonly DateTime StartTime = DateTime.Now;

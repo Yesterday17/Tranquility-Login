@@ -97,10 +97,14 @@ namespace Tranquility_Login
                     case Constants.LoadState.startupTrack:
                         //Startup
                         MethodUtils.CheckoutLatest();
-                        new DownloadForm("更新").Show();
+                        frm_download = new DownloadForm("更新");
+                        frm_download.exit = false;
+
+                        frm_download.ShowDialog();
 
                         //Track
                         ProcessUtils.StartProcess(Constants.self, "track");
+                        
                         break;
 
                     case Constants.LoadState.track:

@@ -27,8 +27,19 @@ namespace Tranquility_Login.Utils
             }
 
             if (!Repository.IsValid(path))
+            {
+                try
+                {
+                    Directory.Delete(Constants.path, true);
+                    Directory.CreateDirectory(Constants.path);
+                }
+                catch (Exception e)
+                {
+                    MessageBox.Show(e.Message);
+                    System.Environment.Exit(-1);
+                }
                 return false;
-
+            }
 
             using (reppo = new Repository(path))
             {
