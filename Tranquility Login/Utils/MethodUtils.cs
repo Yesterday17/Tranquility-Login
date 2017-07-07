@@ -143,12 +143,24 @@ namespace Tranquility_Login.Utils
         /// <summary>
         /// 判断两个DateTime之间是否相似(即相隔时间在一定范围以内)
         /// </summary>
-        /// <param name="x"></param>
-        /// <param name="y"></param>
+        /// <param name="x">x</param>
+        /// <param name="y">y</param>
         /// <returns></returns>
         public static Boolean Alike(DateTime x, DateTime y)
         {
-            return Math.Abs(long.Parse(DateTime2TimeStamp(x)) - long.Parse(DateTime2TimeStamp(y))) < 60000;
+            return Alike(x, y, 60000);
+        }
+
+        /// <summary>
+        /// 判断两个DateTime之间是否相似(即相隔时间在一定范围以内)
+        /// </summary>
+        /// <param name="x">x</param>
+        /// <param name="y">y</param>
+        /// <param name="time">时间间隔(ms)</param>
+        /// <returns></returns>
+        public static Boolean Alike(DateTime x, DateTime y, long time)
+        {
+            return Math.Abs(long.Parse(DateTime2TimeStamp(x)) - long.Parse(DateTime2TimeStamp(y))) <= time;
         }
     }
 }

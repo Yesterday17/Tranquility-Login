@@ -99,6 +99,7 @@ namespace Tranquility_Login
             multimc = 5,
 
             track = 8,
+            startupTrack = 9,
 
             daemon = 10,
         };

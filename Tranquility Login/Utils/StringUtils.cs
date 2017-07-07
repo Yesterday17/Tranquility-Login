@@ -125,5 +125,28 @@ namespace Tranquility_Login.Utils
 
             return content;
         }
+
+        /// <summary>
+        /// 将数组转换成参数形式，默认移除首项。
+        /// </summary>
+        /// <param name="args">参数数组</param>
+        /// <returns>参数命令</returns>
+        public static String getArrayArgumented(String[] args)
+        {
+            String output = "";
+            Boolean first = true;
+
+            foreach(String arg in args)
+            {
+                if (first)
+                {
+                    first = false;
+                    continue;
+                }
+
+                output += arg + " ";
+            }
+            return output;
+        }
     }
 }

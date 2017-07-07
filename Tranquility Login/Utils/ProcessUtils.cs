@@ -9,18 +9,23 @@ namespace Tranquility_Login.Utils
 {
     class ProcessUtils
     {
+        public static DateTime findNoMinecraftProcessTime = Constants.StartTime;
+
         public static void Track()
         {
             Process[] processes;
             processes = System.Diagnostics.Process.GetProcesses();
-            
-            foreach(Process process in processes)
+
+            foreach (Process process in processes)
             {
-                if((process.ProcessName == "java.exe" || process.ProcessName == "javaw.exe")
-                    && process.MainWindowTitle == "Minecraft"
-                    && MethodUtils.Alike(process.StartTime, Constants.StartTime))
+                //System.Windows.Forms.MessageBox.Show($"Title: {process.MainWindowTitle.Substring(0, 9)}\nName: {process.ProcessName}\n");
+                findNoMinecraftProcessTime = DateTime.Now;
+                if ((process.ProcessName == "java" || process.ProcessName == "javaw")
+                    && process.MainWindowTitle.Length >= 9
+                    && process.MainWindowTitle.Substring(0, 9) == "Minecraft"
+                    && MethodUtils.Alike(process.StartTime, Constants.StartTime, 60000))
                 {
-                    System.Windows.Forms.MessageBox.Show(Newtonsoft.Json.JsonConvert.SerializeObject(process));
+                    findNoMinecraftProcessTime = Constants.StartTime;
                 }
             }
         }
@@ -29,10 +34,10 @@ namespace Tranquility_Login.Utils
         {
             Process p = setProcess(fileName, arguments);
 
-            Task start = new Task(new Action( () =>
-            {
-                p.Start();
-            }));
+            Task start = new Task(new Action(() =>
+           {
+               p.Start();
+           }));
 
             start.Start();
             System.Threading.Thread.Sleep(1000);
