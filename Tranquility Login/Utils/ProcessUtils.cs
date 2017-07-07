@@ -9,6 +9,7 @@ namespace Tranquility_Login.Utils
 {
     class ProcessUtils
     {
+        public static DateTime lastFindMinecraftTime;
         public static DateTime findNoMinecraftProcessTime = Constants.StartTime;
 
         public static void Track()
@@ -24,9 +25,10 @@ namespace Tranquility_Login.Utils
                 {
                     if ((process.ProcessName == "java" || process.ProcessName == "javaw")
                     && process.MainWindowTitle.Substring(0, 9) == "Minecraft"
-                    && MethodUtils.Alike(process.StartTime, Constants.StartTime, 600000000))
+                    && MethodUtils.Alike(process.StartTime, Constants.StartTime, 60000))
                     {
-                        findNoMinecraftProcessTime = Constants.StartTime;
+                        lastFindMinecraftTime = DateTime.Now;
+                        break;
                     }
                 }
                 

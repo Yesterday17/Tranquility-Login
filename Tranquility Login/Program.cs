@@ -107,7 +107,9 @@ namespace Tranquility_Login
                         do
                         {
                             ProcessUtils.Track();
-                        } while (MethodUtils.Alike(ProcessUtils.findNoMinecraftProcessTime, Constants.StartTime, 60000));
+                        }
+                        while (MethodUtils.Alike(ProcessUtils.findNoMinecraftProcessTime, ProcessUtils.lastFindMinecraftTime, 60000));
+
                         ProcessUtils.StartProcess(Constants.self, "exit");
                         break;
                 }
