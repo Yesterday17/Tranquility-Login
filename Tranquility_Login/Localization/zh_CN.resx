@@ -117,16 +117,7 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="DefaultPassword" xml:space="preserve">
-    <value />
-    <comment>默认的Git用户密码。</comment>
-  </data>
-  <data name="DefaultRepository" xml:space="preserve">
-    <value>https://github.com/yesterday17/Tranquility-Login</value>
-    <comment>默认的整合地址。注意：直接Clone编译的不是一个合法的Minecraft整合！</comment>
-  </data>
-  <data name="DefaultUsername" xml:space="preserve">
-    <value>Anonymous</value>
-    <comment>默认的Git用用户名。</comment>
+  <data name="err_101" xml:space="preserve">
+    <value>Error 101: 无效的账号格式。已采用默认账号！</value>
   </data>
 </root>

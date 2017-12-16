@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Tranquility_Login.Properties {
+namespace Tranquility_Login.Localization {
     using System;
     
     
@@ -22,14 +22,14 @@ namespace Tranquility_Login.Properties {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "15.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class Resources {
+    internal class zh_CN {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal Resources() {
+        internal zh_CN() {
         }
         
         /// <summary>
@@ -39,7 +39,7 @@ namespace Tranquility_Login.Properties {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Tranquility_Login.Properties.Resources", typeof(Resources).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Tranquility_Login.Localization.zh_CN", typeof(zh_CN).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -61,29 +61,11 @@ namespace Tranquility_Login.Properties {
         }
         
         /// <summary>
-        ///   查找类似  的本地化字符串。
+        ///   查找类似 Error 101: 无效的账号格式。已采用默认账号！ 的本地化字符串。
         /// </summary>
-        internal static string DefaultPassword {
+        internal static string err_101 {
             get {
-                return ResourceManager.GetString("DefaultPassword", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 https://github.com/yesterday17/Tranquility-Login 的本地化字符串。
-        /// </summary>
-        internal static string DefaultRepository {
-            get {
-                return ResourceManager.GetString("DefaultRepository", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 Anonymous 的本地化字符串。
-        /// </summary>
-        internal static string DefaultUsername {
-            get {
-                return ResourceManager.GetString("DefaultUsername", resourceCulture);
+                return ResourceManager.GetString("err_101", resourceCulture);
             }
         }
     }
