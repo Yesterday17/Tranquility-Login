@@ -68,5 +68,14 @@ namespace Tranquility_Login.Localization {
                 return ResourceManager.GetString("err_101", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   查找类似 Warning 101: 识别到无效的任务参数！ 的本地化字符串。
+        /// </summary>
+        internal static string wrn_101 {
+            get {
+                return ResourceManager.GetString("wrn_101", resourceCulture);
+            }
+        }
     }
 }

@@ -120,4 +120,7 @@
   <data name="err_101" xml:space="preserve">
     <value>Error 101: 无效的账号格式。已采用默认账号！</value>
   </data>
+  <data name="wrn_101" xml:space="preserve">
+    <value>Warning 101: 识别到无效的任务参数！</value>
+  </data>
 </root>

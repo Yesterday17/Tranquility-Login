@@ -73,7 +73,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>zh_CN.resx</DependentUpon>
     </Compile>
-    <Compile Include="Utils\ArgumentUtils.cs" />
+    <Compile Include="Utils\ArgumentHelper.cs" />
     <Compile Include="Utils\GitHelper.cs" />
     <Compile Include="Utils\StringUtils.cs" />
     <Page Include="DataStore\DataStore\DataStore.xaml">
