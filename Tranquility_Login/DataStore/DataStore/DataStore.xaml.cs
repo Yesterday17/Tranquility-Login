@@ -53,13 +53,13 @@ namespace Expression.Blend.DataStore.DataStore
             }
         }
 
-        private string _Property1 = string.Empty;
+        private string _Progress = string.Empty;
 
-        public string Property1
+        public string Progress
         {
             get
             {
-                return this._Property1;
+                return this._Progress;
             }
 
             set
@@ -69,10 +69,10 @@ namespace Expression.Blend.DataStore.DataStore
                     return;
                 }
                 
-                if (this._Property1 != value)
+                if (this._Progress != value)
                 {
-                    this._Property1 = value;
-                    this.OnPropertyChanged("Property1");
+                    this._Progress = value;
+                    this.OnPropertyChanged("Progress");
                 }
             }
         }
@@ -113,18 +113,18 @@ namespace Expression.Blend.DataStore.DataStore
             }
         }
 
-        private string _Property1 = string.Empty;
+        private string _Progress = string.Empty;
 
-        public string Property1
+        public string Progress
         {
             get
             {
-                return DataStoreGlobalStorage.Singleton.Property1;
+                return DataStoreGlobalStorage.Singleton.Progress;
             }
 
             set
             {
-                DataStoreGlobalStorage.Singleton.Property1 = value;
+                DataStoreGlobalStorage.Singleton.Progress = value;
             }
         }
     }

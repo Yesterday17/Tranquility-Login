@@ -24,5 +24,10 @@ namespace Tranquility_Login
         {
             InitializeComponent();
         }
+
+        private void window_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            this.DragMove();
+        }
     }
 }
