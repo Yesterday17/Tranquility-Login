@@ -6,10 +6,21 @@ using System.Text;
 
 namespace Tranquility_Login.Utils
 {
+    /// <summary>
+    /// 字符串处理的工具类
+    /// </summary>
     public class StringUtils
     {
+        /// <summary>
+        /// 对非静态方法的封装
+        /// </summary>
         public static StringUtils instance = new StringUtils();
 
+        /// <summary>
+        /// 根据输入的账号信息获取用户名和密码
+        /// </summary>
+        /// <param name="account">输入的账号信息</param>
+        /// <returns>用于CloneOptions的用户数据信息</returns>
         public UsernamePasswordCredentials getCredentials(string account)
         {
             string[] accountData = account.Split('@');

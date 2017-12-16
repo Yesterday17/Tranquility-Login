@@ -5,6 +5,9 @@ using System.Text;
 
 namespace Tranquility_Login.Utils
 {
+    /// <summary>
+    /// 处理参数的帮助类
+    /// </summary>
     public static class ArgumentHelper
     {
         /* 
@@ -33,9 +36,14 @@ namespace Tranquility_Login.Utils
          *   如果需要更详细的帮助信息，请提交Issue至 https://github.com/yesterday17/Tranquility-Login
          */
 
+        /// <summary>
+        /// 是否启动自动模式
+        /// </summary>
         public static Boolean auto = false;
-        public static Boolean init = false;
 
+        /// <summary>
+        /// 运行步骤
+        /// </summary>
         public static Stack<Action> run = new Stack<Action>();
 
     }
