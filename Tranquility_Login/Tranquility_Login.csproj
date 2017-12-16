@@ -68,6 +68,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Utils\ArgumentUtils.cs" />
     <Page Include="DataStore\DataStore\DataStore.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

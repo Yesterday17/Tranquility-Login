@@ -3,4 +3,4 @@
    此文件由设计工具再生成。更改
    此文件可能会导致错误。
 -->
-<DataStore:DataStore xmlns:DataStore="clr-namespace:Expression.Blend.DataStore.DataStore" Progress="Cras nam aliquam" />
+<DataStore:DataStore xmlns:DataStore="clr-namespace:Expression.Blend.DataStore.DataStore" Progress="下载中……" />
