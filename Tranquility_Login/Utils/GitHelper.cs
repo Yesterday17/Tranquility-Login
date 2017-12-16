@@ -19,11 +19,13 @@ namespace Tranquility_Login.Utils
         public static void Clone(string repo, string account)
         {
             // 进行用户名或密码的配置
-            CloneOptions co = new CloneOptions();
-            co.CredentialsProvider = (_url, _user, _cred) => StringUtils.instance.getCredentials(account);
+            CloneOptions co = new CloneOptions
+            {
+                CredentialsProvider = (_url, _user, _cred) => StringUtils.instance.getCredentials(account)
+            };
 
             // Clone步骤
-            Repository.Clone(repo, @"", co);
+            Repository.Clone(repo, Constants.minecraft_path, co);
         }
 
         /// <summary>
@@ -32,7 +34,7 @@ namespace Tranquility_Login.Utils
         /// <param name="repo">Git仓库地址</param>
         public static void Clone(string repo)
         {
-            Clone(repo, "");
+            Clone(repo, Constants.minecraft_path);
         }
     }
 }

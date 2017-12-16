@@ -42,6 +42,6 @@ namespace Tranquility_Login.Utils
             }
 
             return new UsernamePasswordCredentials { Username = accountData[0], Password = accountData[1] };
-        }
+        }        
     }
 }
