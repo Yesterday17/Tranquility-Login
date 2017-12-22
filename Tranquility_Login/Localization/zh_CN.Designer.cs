@@ -70,6 +70,55 @@ namespace Tranquility_Login.Localization {
         }
         
         /// <summary>
+        ///   查找类似 用法：Tranquility-Login &lt;task&gt; [-options]
+        ///
+        ///其中任务(&lt;task&gt;)包括：
+        ///   auto        根据实际情况决定进行clone、pull、configure、start
+        ///   clone       获取完整的整合包
+        ///   pull        获取最新的整合副本
+        ///   configure   自动配置启动器设置
+        ///   start | launch
+        ///               启动游戏
+        ///
+        ///其中选项([-options])包括：
+        ///   -launcher=[multimc|hmcl]
+        ///               配置MultiMC或HMCL启动器的启动设置
+        ///   -repo=[:&lt;repository name&gt;] 
+        ///               设置本程序获取的整合包地址
+        ///   -account=[:&lt;username&gt;@:&lt;password&gt;]
+        ///               设置Clone仓库时使用的用户名和密码
+        ///   -? | -help  输出此帮助信息
+        ///   -version    输出产品版本并退出
+        ///   
+        /// [字符串的其余部分被截断]&quot;; 的本地化字符串。
+        /// </summary>
+        internal static string HelpData {
+            get {
+                return ResourceManager.GetString("HelpData", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 &quot;
+        /// 的本地化字符串。
+        /// </summary>
+        internal static string version_after {
+            get {
+                return ResourceManager.GetString("version_after", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 
+        ///Tranquility Login version &quot; 的本地化字符串。
+        /// </summary>
+        internal static string version_prefix {
+            get {
+                return ResourceManager.GetString("version_prefix", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 Warning 101: 识别到无效的任务参数！ 的本地化字符串。
         /// </summary>
         internal static string wrn_101 {

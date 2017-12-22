@@ -24,7 +24,7 @@ namespace Tranquility_Login.Utils
          *                  启动游戏
          *   
          *   其中选项([-options])包括：
-         *      -launcher [multimc | hmcl]
+         *      -launcher=[multimc|hmcl]
          *                  配置MultiMC或HMCL启动器的启动设置
          *      -repo=[:<repository name>] 
          *                  设置本程序获取的整合包地址
@@ -42,7 +42,7 @@ namespace Tranquility_Login.Utils
         public static Boolean auto = false;
 
         /// <summary>
-        /// 运行步骤
+        /// 运行步骤栈
         /// </summary>
         public static Stack<Action> run = new Stack<Action>();
 

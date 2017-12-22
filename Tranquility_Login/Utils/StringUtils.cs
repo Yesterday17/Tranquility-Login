@@ -17,11 +17,27 @@ namespace Tranquility_Login.Utils
         public static StringUtils instance = new StringUtils();
 
         /// <summary>
+        /// 进行更加安全的字符串匹配
+        /// </summary>
+        /// <param name="original">原字符串</param>
+        /// <param name="match">匹配字符串</param>
+        /// <param name="start">开始位置</param>
+        /// <param name="length">截取长度</param>
+        /// <returns>是否匹配</returns>
+        public static Boolean SubStringMatch(string original, string match, int start, int length)
+        {
+            if (original.Length < start + length)
+                return false;
+
+            return (original.Substring(start, length) == match);
+        }
+
+        /// <summary>
         /// 根据输入的账号信息获取用户名和密码
         /// </summary>
         /// <param name="account">输入的账号信息</param>
         /// <returns>用于CloneOptions的用户数据信息</returns>
-        public UsernamePasswordCredentials getCredentials(string account)
+        public UsernamePasswordCredentials GetCredentials(string account)
         {
             string[] accountData = account.Split('@');
             try

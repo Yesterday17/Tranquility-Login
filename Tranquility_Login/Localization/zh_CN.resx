@@ -120,7 +120,38 @@
   <data name="err_101" xml:space="preserve">
     <value>Error 101: 无效的账号格式。已采用默认账号！</value>
   </data>
+  <data name="HelpData" xml:space="preserve">
+    <value>用法：Tranquility-Login &lt;task&gt; [-options]
+
+其中任务(&lt;task&gt;)包括：
+   auto        根据实际情况决定进行clone、pull、configure、start
+   clone       获取完整的整合包
+   pull        获取最新的整合副本
+   configure   自动配置启动器设置
+   start | launch
+               启动游戏
+
+其中选项([-options])包括：
+   -launcher=[multimc|hmcl]
+               配置MultiMC或HMCL启动器的启动设置
+   -repo=[:&lt;repository name&gt;] 
+               设置本程序获取的整合包地址
+   -account=[:&lt;username&gt;@:&lt;password&gt;]
+               设置Clone仓库时使用的用户名和密码
+   -? | -help  输出此帮助信息
+   -version    输出产品版本并退出
+   
+如果需要更详细的帮助信息，请提交Issue至 https://github.com/yesterday17/Tranquility-Login</value>
+  </data>
   <data name="wrn_101" xml:space="preserve">
     <value>Warning 101: 识别到无效的任务参数！</value>
+  </data>
+  <data name="version_after" xml:space="preserve">
+    <value>"
+</value>
+  </data>
+  <data name="version_prefix" xml:space="preserve">
+    <value>
+Tranquility Login version "</value>
   </data>
 </root>

@@ -21,7 +21,7 @@ namespace Tranquility_Login.Utils
             // 进行用户名或密码的配置
             CloneOptions co = new CloneOptions
             {
-                CredentialsProvider = (_url, _user, _cred) => StringUtils.instance.getCredentials(account)
+                CredentialsProvider = (_url, _user, _cred) => StringUtils.instance.GetCredentials(account)
             };
 
             // Clone步骤

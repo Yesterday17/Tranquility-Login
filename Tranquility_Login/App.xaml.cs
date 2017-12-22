@@ -24,6 +24,7 @@ namespace Tranquility_Login
                     {
                         case "auto":
                             ArgumentHelper.auto = true;
+                            MainWindow.Show();
                             break;
 
                         case "clone":
@@ -52,6 +53,35 @@ namespace Tranquility_Login
                 else
                 {
                     // TODO: 处理[-options]参数
+                    if(StringUtils.SubStringMatch(s, "launcher", 1, 8))
+                    {
+                        // TODO: 根据启动器配置
+                        continue;
+                    }
+
+                    if(StringUtils.SubStringMatch(s, "repo", 1, 4))
+                    {
+                        // TODO: 设置项目仓库
+                        continue;
+                    }
+
+                    if(StringUtils.SubStringMatch(s, "account", 1, 7))
+                    {
+                        // TODO: 配置账号
+                        continue;
+                    }
+                        
+                    if( (s.Length == 2 && s[1] == '?') || StringUtils.SubStringMatch(s, "help", 1, 4))
+                    {
+                        Console.Write(Localization.zh_CN.HelpData);
+                        Application.Current.Shutdown();
+                    }
+
+                    if(StringUtils.SubStringMatch(s, "version", 1, 7))
+                    {
+                        Console.Write(Localization.zh_CN.version_prefix + Constants.version + Localization.zh_CN.version_after);
+                        Application.Current.Shutdown();
+                    }
                 }
             }
         }
