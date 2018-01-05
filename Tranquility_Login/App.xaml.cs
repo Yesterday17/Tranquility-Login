@@ -73,13 +73,13 @@ namespace Tranquility_Login
                         
                     if( (s.Length == 2 && s[1] == '?') || StringUtils.SubStringMatch(s, "help", 1, 4))
                     {
-                        Console.Write(Localization.zh_CN.HelpData);
+                        MessageBox.Show(Localization.zh_CN.HelpData, "Tranquility Login 启动参数说明");
                         Application.Current.Shutdown();
                     }
 
                     if(StringUtils.SubStringMatch(s, "version", 1, 7))
                     {
-                        Console.Write(Localization.zh_CN.version_prefix + Constants.version + Localization.zh_CN.version_after);
+                        MessageBox.Show($"{Localization.zh_CN.version_prefix}{Constants.version}{Localization.zh_CN.version_after}", "Tranquility Login 启动参数说明");
                         Application.Current.Shutdown();
                     }
                 }
